@@ -1,0 +1,11 @@
+@import 'variables';
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}

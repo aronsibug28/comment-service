@@ -1,0 +1,6 @@
+@mixin bootstrapWidth($columnNo, $paddingLeft: 15px, $paddingRight: 15px) {
+  width: ((100/12) * $columnNo) * 1%;
+  padding-left: $paddingLeft;
+  padding-right: $paddingRight;
+  vertical-align: top;
+}

@@ -1,30 +1,50 @@
-# react-crowdhound
+<p align="center">
+  <h1>
+    React Crowdhound
+  </h1>
+  <span>
+    A collection of React components for Crowdhound
+  </span>
+</p>
 
-> ReactJS plugin for crowdhound.io
+<div align="center">
 
-[![NPM](https://img.shields.io/npm/v/react-crowdhound.svg)](https://www.npmjs.com/package/react-crowdhound) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+  ![](https://flat.badgen.net/badge/React/16.8.3/blue)
+  ![](https://badgen.net/npm/v/wix-style-react/latest)
+  ![Dependencies](https://img.shields.io/david/wix/wix-style-react.svg?style=flat-square)
+  ![DevDependencies](https://img.shields.io/david/dev/ant-design/ant-design.svg?style=flat-square)
 
-## Install
+</div>
 
-```bash
-npm install --save react-crowdhound
-```
 
-## Usage
+## 📦 Install
 
+Add to package.json
 ```jsx
-import React, { Component } from 'react'
-
-import MyComponent from 'react-crowdhound'
-import 'react-crowdhound/dist/index.css'
-
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+{
+    "dependencies": {
+        "react-crowdhound": "file:/Development/projects/react-crowdhound-local"
+    }
 }
 ```
 
-## License
+## 🚀 Usage
 
-MIT © [](https://github.com/)
+On the App.js, import `useCrowndhound` so we can initialize Crowdhound
+
+```jsx
+  import useCrowdhound from 'react-crowdhound'
+```
+
+Then add this code inside your main function
+
+```jsx
+  useCrowdhound({
+    version: '2.0',
+    protocol: 'http',
+    host: 'uat.crowdhound.io',
+    port: 80,
+    apikey: 'API11OHHOKHGFQ0OYEZZZM7I79OF7',
+    debug: true
+  })
+```

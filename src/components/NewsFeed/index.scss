@@ -1,0 +1,59 @@
+
+#ch-add-news-feed-container {
+    margin-top: 20px;
+}
+
+
+#app-ch-newsfeed {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+	color: #2e2d2d;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.ch-newsfeed-title {
+    font-size: 16px;
+    margin: 10px 0 5px 0;
+}
+
+.ch-newsfeed-maintable {
+    width: 100%;
+    .ch-newsfeed-left-cell {
+        width: 45px;
+    }
+    .ch-newsfeed-right-cell {
+        text-align: left;
+        vertical-align: middle;
+    }
+    .ch-newsfeed-description {
+        font-size: 12px;
+        text-align: justify;
+        margin: 0;
+        p {
+            margin: 0;
+        }
+    }
+}
+
+img.ch-newsfeed-avatar {
+    height: 40px;
+    width: 40px;
+}
+
+.ch-newsfeed-userid {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    width: 100%;
+}
+
+.ch-newsfeed-date {
+    display: block;
+    font-size: 12px;
+    width: 100%;
+}
+
+a.ch-newsfeed-see-more {
+    text-decoration: none;
+    color: #8a8a8a;
+}

@@ -1,6 +1,14 @@
 import React from 'react'
-import styles from './styles.module.css'
+import Crowdhound from './components'
+import './index.scss'
+import '../node_modules/bootstrap/dist/css/bootstrap.css'
 
-export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: {text}</div>
+const AppComponent = (props) => {
+  return (
+    <div id='app'>
+      <Crowdhound {...props} />
+    </div>
+  )
 }
+
+export default AppComponent

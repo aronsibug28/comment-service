@@ -5,15 +5,20 @@
   "author": "",
   "license": "MIT",
   "repository": "/react-crowdhound",
-  "main": "dist/index.js",
-  "module": "dist/index.modern.js",
   "source": "src/index.js",
   "engines": {
     "node": ">=10"
   },
+  "main": "build/index.js",
+  "module": "build/index.esm.js",
+  "browser": "build/index.js",
+  "style": "build/index.css",
+  "files": [
+    "lib"
+  ],
   "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs",
-    "start": "microbundle-crl watch --no-compress --format modern,cjs",
+    "build": "rollup -c",
+    "start": "rollup -c -w",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
@@ -21,15 +26,41 @@
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "deploy": "gh-pages -d example/build",
+    "storybook": "start-storybook -p 6006",
+    "storybook:export": "build-storybook"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "microbundle-crl": "^0.13.10",
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "@rollup/plugin-commonjs": "^13.0.0",
+    "@rollup/plugin-image": "^2.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^8.1.0",
+    "@storybook/addon-a11y": "^5.3",
+    "@storybook/addon-docs": "^5.3",
+    "@storybook/addon-actions": "^5.3",
+    "@storybook/addon-centered": "^5.3",
+    "@storybook/addon-console": "^1.2.1",
+    "@storybook/addon-options": "^5.3",
+    "@storybook/channels": "^5.3",
+    "@storybook/react": "^5.3",
+    "@storybook/storybook-deployer": "^2.8.1",
+    "@storybook/addon-info": "^5.3",
+    "autoprefixer": "^9.6.1",
     "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.8.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-preset-minify": "^0.5.0",
+    "babel-preset-react-app": "^9.1.2",
     "cross-env": "^7.0.2",
+    "css-loader": "^3.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^14.1.0",
@@ -40,14 +71,29 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-standard": "^4.0.1",
+    "file-loader": "^6.0.0",
     "gh-pages": "^2.2.0",
+    "node-sass": "^4.14.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1"
+    "react-scripts": "^3.4.1",
+    "react-show-more": "^2.0.0",
+    "rollup": "^2.18.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-local-resolve": "^1.0.7",
+    "rollup-plugin-peer-deps-external": "^2.2.2",
+    "rollup-plugin-postcss": "^3.1.2",
+    "sass-loader": "^8.0.2",
+    "source-map-loader": "^0.2.4",
+    "webpack-build-notifier": "^1.0.3",
+    "wix-storybook-utils": "^3.0.125"
   },
-  "files": [
-    "dist"
-  ]
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
+    "bulma": "^0.9.0",
+    "moment": "^2.27.0",
+    "query-string": "^6.13.1"
+  }
 }
