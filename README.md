@@ -48,3 +48,15 @@ Then add this code inside your main function
     debug: true
   })
 ```
+
+
+## 🔨 Development
+
+To start the project, just run the following:
+
+```jsx
+  yarn install
+  npm run storybook
+```
+
+then go to `http://localhost:6006/`
