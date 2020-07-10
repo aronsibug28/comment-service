@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Dropdown = ({ actions = [], icon }) => {
+const Dropdown = ({ id, actions = [], icon }) => {
   return (
     <div className='dropdown is-hoverable'>
       <div className='dropdown-trigger'>
@@ -23,7 +23,7 @@ const Dropdown = ({ actions = [], icon }) => {
               className='dropdown-item cursor-pointer'
               onClick={action.onClick}
             >
-              {action.label}
+              <label htmlFor={id}>{action.label}</label>
             </div>
           ))}
         </div>

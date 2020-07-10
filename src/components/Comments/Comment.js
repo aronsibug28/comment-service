@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import moment from 'moment'
 import anonymousAvatar from '../../assets/images/anonymous-avatar.png'
 import { updateComment, deleteComment } from './actions'
-import Comments from './index'
+// import Comments from './index'
 
 import Dropdown from '../Dropdown'
+import LikesAndComments from '../LikesAndComments'
 
-const Comment = ({ comment = {}, allowNested, onGetComments }) => {
+const Comment = ({ comment = {}, userData, onGetComments }) => {
   const [userComment, setUserComment] = useState(comment.description)
   const [isEditing, setIsEditing] = useState(false)
   const [isShowTextArea, setIsShowTextArea] = useState(false)
@@ -25,10 +26,15 @@ const Comment = ({ comment = {}, allowNested, onGetComments }) => {
     setIsEditing(true)
   }
 
-  const onReplyComment = () => {
-    setIsShowTextArea(true)
+  const onReplyComment = (isReplying) => {
+    setIsShowTextArea(isReplying)
   }
 
+  const onEnterComment = async (e) => {
+    if (e.keyCode === 13) {
+      await onSaveComment()
+    }
+  }
   const onSaveComment = async () => {
     setIsEditing(false)
     await updateComment(comment, userComment)
@@ -38,10 +44,6 @@ const Comment = ({ comment = {}, allowNested, onGetComments }) => {
 
   const onCancelComment = () => {
     setIsEditing(false)
-  }
-
-  const onCancelReply = () => {
-    setIsShowTextArea(false)
   }
 
   return (
@@ -77,13 +79,9 @@ const Comment = ({ comment = {}, allowNested, onGetComments }) => {
               </React.Fragment>
             ) : (
               <Dropdown
+                id={comment.id}
                 icon='fa fa-caret-down'
                 actions={[
-                  {
-                    label: !isShowTextArea ? 'Reply' : 'Cancel',
-                    onClick: () =>
-                      !isShowTextArea ? onReplyComment() : onCancelReply()
-                  },
                   {
                     label: 'Edit',
                     onClick: () => onEditComment()
@@ -102,11 +100,13 @@ const Comment = ({ comment = {}, allowNested, onGetComments }) => {
             <div className='ch-comment-description'>
               {isEditing ? (
                 <textarea
+                  id={comment.id}
                   key={comment.id}
                   className='textarea'
                   onChange={(e) => setUserComment(e.target.value)}
+                  onKeyUp={(e) => onEnterComment(e)}
                   value={userComment}
-                  rows='2'
+                  rows='1'
                   style={{
                     fontSize: '13px'
                   }}
@@ -123,14 +123,23 @@ const Comment = ({ comment = {}, allowNested, onGetComments }) => {
             </div>
           </div>
         </div>
-
-        {allowNested && (
-          <Comments
-            postId={comment.id}
-            isMainComment={false}
+        <div style={{ marginLeft: '40px' }}>
+          <LikesAndComments
+            isReply
+            data={comment}
+            userData={userData}
             isShowTextArea={isShowTextArea}
+            onClickReply={onReplyComment}
+            callback={onGetComments}
           />
-        )}
+        </div>
+
+        {/* <Comments
+          postId={comment.id}
+          isMainComment={false}
+          userData={userData}
+          isShowTextArea={isShowTextArea}
+        /> */}
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
+import anonymousAvatar from '../../assets/images/anonymous-avatar.png'
 
-export default ({ onAddNewsFeed, buttonLabel, styles }) => {
-  const { mainContainer, textArea } = styles || {}
+export default ({ onAddNewsFeed, userData }) => {
   const [post, setPost] = useState('')
 
   const onPost = async (post) => {
@@ -10,28 +10,35 @@ export default ({ onAddNewsFeed, buttonLabel, styles }) => {
   }
 
   return (
-    <div
-      id='ch-add-news-feed-container'
-      className='columns'
-      style={{
-        ...mainContainer,
-        minWidth: '700px'
-      }}
-    >
-      <div className='column is-11'>
-        <textarea
-          className='ch-add-news-feed-textarea textarea'
-          style={textArea}
-          onChange={(e) => setPost(e.target.value)}
-          value={post}
-          rows='3'
-        />
+    <div className='ch-newsfeed-form-wrapper'>
+      <div className='ch-newsfeed-maintable columns'>
+        <div className='level'>
+          <div className='level-left'>
+            <div className='ch-newsfeed-left-cell level-item'>
+              <img className='ch-newsfeed-avatar' src={anonymousAvatar} />
+            </div>
+            <div
+              className='ch-newsfeed-right-cell level-item'
+              style={{ flexDirection: 'column' }}
+            >
+              <div className='ch-newsfeed-userid'>
+                {userData.name ? userData.name : 'Unknown'}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className='column'>
-        <button className='button is-light' onClick={() => onPost(post)}>
-          {buttonLabel}
-        </button>
-      </div>
+      <textarea
+        className='ch-newsfeed-post-textarea textArea'
+        placeholder={`What's on your mind?`}
+        value={post}
+        onChange={(e) => {
+          setPost(e.target.value)
+        }}
+      />
+      <button className='button is-light is-small' onClick={() => onPost(post)}>
+        POST
+      </button>
     </div>
   )
 }

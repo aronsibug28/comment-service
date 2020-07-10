@@ -1,14 +1,14 @@
 import React from 'react'
 import Comment from './Comment'
 
-const CommentList = ({ comments = [], allowNested, onGetComments }) => {
+const CommentList = ({ comments = [], userData, onGetComments }) => {
   return (
     <div>
       {comments.map((comment) => (
         <Comment
           key={comment.id}
           comment={comment}
-          allowNested={allowNested}
+          userData={userData}
           onGetComments={onGetComments}
         />
       ))}

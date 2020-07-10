@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import moment from 'moment'
+import ShowMore from 'react-show-more'
 import anonymousAvatar from '../../assets/images/anonymous-avatar.png'
 import { updateNewsFeed, deleteNewsFeed } from './actions'
 
-import Counter from '../Counter'
-import Comments from '../Comments'
+// import Comments from '../Comments'
 import Dropdown from '../Dropdown'
+import LikesAndComments from '../LikesAndComments'
 
-const NewsFeedSingle = ({ newsFeed = {}, onGetPosts }) => {
+const NewsFeedSingle = ({ newsFeed = {}, userData, onGetPosts }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [post, setPost] = useState(newsFeed.description)
 
@@ -39,20 +40,14 @@ const NewsFeedSingle = ({ newsFeed = {}, onGetPosts }) => {
   return (
     <div
       id={`news-feed-${newsFeed.id}`}
+      className='ch-newsfeed-wrapper'
       key={newsFeed.id}
       style={{
-        width: '1000px'
+        minWidth: '1000px'
       }}
     >
-      <div
-        style={{
-          backgroundColor: 'rgb(251, 251, 251)',
-          marginTop: '20px',
-          padding: '10px'
-        }}
-        className='ch-newsfeed-maintable clearfix'
-      >
-        <div className='level'>
+      <div className='ch-newsfeed-maintable'>
+        <div className='level m-b-5'>
           <div className='level-left'>
             <div className='level-item'>
               <img className='ch-newsfeed-avatar' src={anonymousAvatar} />
@@ -108,10 +103,7 @@ const NewsFeedSingle = ({ newsFeed = {}, onGetPosts }) => {
           </div>
         </div>
 
-        <div
-          className='ch-newsfeed-description'
-          style={{ borderBottom: '1px solid #dedede' }}
-        >
+        <div className='ch-newsfeed-description'>
           {isEditing ? (
             <textarea
               key={newsFeed.id}
@@ -121,24 +113,28 @@ const NewsFeedSingle = ({ newsFeed = {}, onGetPosts }) => {
               rows='2'
             />
           ) : (
-            <p
-              style={{
-                fontSize: '16px'
-              }}
+            <ShowMore
+              lines={3}
+              more='See More'
+              less='See Less'
+              anchorClass='ch-see-more-content'
             >
-              {post}
-            </p>
+              <p>{post}</p>
+            </ShowMore>
           )}
         </div>
 
         <div>
-          <Counter elementId={newsFeed.id} name='Likes' type='likes' />{' '}
-          <Counter elementId={newsFeed.id} name='Dislikes' type='dislikes' />
+          <LikesAndComments
+            data={newsFeed}
+            userData={userData}
+            callback={onGetPosts}
+          />
         </div>
 
-        <div>
-          <Comments isComment postId={newsFeed.id} />
-        </div>
+        {/* <div>
+          <Comments isComment postId={newsFeed.id} userData={userData} />
+        </div> */}
       </div>
     </div>
   )

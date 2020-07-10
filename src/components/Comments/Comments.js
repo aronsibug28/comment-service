@@ -1,46 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import { getActiveComments, addComment } from './actions'
+import React, { useState } from 'react'
+import { addComment } from './actions'
 import CommentList from './CommentList'
 
 import './index.scss'
 
 export const COMPONENT_ID = 'comment'
 
-const Comments = ({ postId, isMainComment, allowNested, isShowTextArea }) => {
+const Comments = ({
+  postId,
+  isMainComment,
+  userData,
+  comments,
+  isShowTextArea,
+  onGetComments
+}) => {
   const [comment, setComment] = useState('')
-  const [comments, setComments] = useState([])
-
-  const getCommentsHandler = async () => {
-    const response = await getActiveComments(postId)
-
-    response.elements.sort(function (a, b) {
-      return a.id - b.id
-    })
-    setComments(response.elements)
-  }
 
   const onAddComment = async (e) => {
     if (e.keyCode === 13) {
       setComment('')
       await addComment(postId, e.target.value)
-      await getCommentsHandler()
+      await onGetComments()
     }
   }
 
-  useEffect(() => {
-    getCommentsHandler()
-  }, [])
-
   return (
-    <div id='ch-comments' style={!isMainComment ? { marginLeft: '40px' } : {}}>
+    <div id='ch-comments'>
       <CommentList
         isMainComment={isMainComment}
-        allowNested={allowNested}
         comments={comments}
-        onGetComments={getCommentsHandler}
+        userData={userData}
+        onGetComments={onGetComments}
       />
       {isShowTextArea && (
         <textarea
+          id={postId}
           style={{
             border: '1px solid #dedede'
           }}
@@ -58,8 +52,7 @@ const Comments = ({ postId, isMainComment, allowNested, isShowTextArea }) => {
 
 Comments.defaultProps = {
   isMainComment: true,
-  isShowTextArea: true,
-  allowNested: true
+  isShowTextArea: true
 }
 
 export default Comments
