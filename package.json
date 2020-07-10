@@ -87,13 +87,13 @@
     "sass-loader": "^8.0.2",
     "source-map-loader": "^0.2.4",
     "webpack-build-notifier": "^1.0.3",
-    "wix-storybook-utils": "^3.0.125"
-  },
-  "dependencies": {
+    "wix-storybook-utils": "^3.0.125",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "bulma": "^0.9.0",
     "moment": "^2.27.0",
     "query-string": "^6.13.1"
+  },
+  "dependencies": {
   }
 }

@@ -12,7 +12,7 @@ const plugins = [
   peerDepsExternal(),
   postcss({
     extract: false,
-    extensions: ['.css, .scss'],
+    extensions: ['.css', '.scss'],
     plugins: [autoprefixer],
     use: ['sass']
   }),
