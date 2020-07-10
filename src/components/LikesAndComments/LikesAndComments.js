@@ -12,8 +12,16 @@ const LikesAndComments = ({
   isReply,
   isShowTextArea,
   onClickReply,
-  callback
+  callback,
+  styles
 }) => {
+  const {
+    newsFeedCommentLikeLabel,
+    newsFeedCommentReplyLabel,
+    newsFeedCommentLikeButton,
+    newsFeedCommentReplyButton,
+    newsFeedCommentCancelButton
+  } = styles || {}
   const [isReplying, setIsReplying] = useState(false)
   const [totalComments, setTotalComments] = useState(0)
   const [comments, setComments] = useState([])
@@ -64,7 +72,10 @@ const LikesAndComments = ({
     return (
       <React.Fragment>
         {totalLikes > 0 && (
-          <label title={namesToolTip.join()}>
+          <label
+            title={namesToolTip.join()}
+            style={{ ...newsFeedCommentLikeLabel }}
+          >
             {totalLikes}&nbsp;
             {!isReply && `Like${totalLikes > 1 ? 's' : ''}`}
           </label>
@@ -77,7 +88,7 @@ const LikesAndComments = ({
     return (
       <React.Fragment>
         {totalComments > 0 && (
-          <label>
+          <label style={{ ...newsFeedCommentReplyLabel }}>
             {totalComments}&nbsp;
             {!isReply && `Comment${totalComments > 1 ? 's' : ''}`}
           </label>
@@ -91,6 +102,7 @@ const LikesAndComments = ({
       <label
         onClick={() => onClickLike()}
         className={`${isLiked ? 'liked' : ''} ch-reaction-button`}
+        style={{ ...newsFeedCommentLikeButton }}
       >
         Like
       </label>
@@ -105,7 +117,11 @@ const LikesAndComments = ({
           </div>
           <div className='ch-action-wrapper'>
             {renderLikeButton()}
-            <label className='ch-reaction-button' htmlFor={data.id}>
+            <label
+              className='ch-reaction-button'
+              htmlFor={data.id}
+              style={{ ...newsFeedCommentReplyButton }}
+            >
               Comment
             </label>
           </div>
@@ -118,6 +134,7 @@ const LikesAndComments = ({
             className='ch-reaction-button'
             onClick={() => onReply()}
             htmlFor={data.id}
+            style={{ ...newsFeedCommentReplyButton }}
           >
             Reply
           </label>
@@ -125,6 +142,7 @@ const LikesAndComments = ({
             <label
               className='ch-reaction-button'
               onClick={() => onCancelReply()}
+              style={{ ...newsFeedCommentCancelButton }}
             >
               Cancel
             </label>
@@ -139,6 +157,7 @@ const LikesAndComments = ({
         isShowTextArea={isShowTextArea}
         comments={comments}
         onGetComments={getCommentsHandler}
+        styles={styles}
       />
     </div>
   )

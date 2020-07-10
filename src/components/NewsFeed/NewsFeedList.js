@@ -1,7 +1,7 @@
 import React from 'react'
 import NewsFeedSingle from './NewsFeedSingle'
 
-const NewsFeedList = ({ newsFeeds = [], userData, onGetPosts }) => {
+const NewsFeedList = ({ newsFeeds = [], userData, onGetPosts, styles }) => {
   return (
     <div>
       {newsFeeds.map((newsFeed) => (
@@ -10,6 +10,7 @@ const NewsFeedList = ({ newsFeeds = [], userData, onGetPosts }) => {
           userData={userData}
           key={newsFeed.id}
           onGetPosts={onGetPosts}
+          styles={styles}
         />
       ))}
     </div>

@@ -7,11 +7,7 @@ import { getActiveNewsFeed, addNewsFeed } from './actions'
 
 export const COMPONENT_ID = 'news-feed'
 
-const userData = {
-  name: 'RS Aron Sibug',
-  id: 123
-}
-export default () => {
+export default ({ userData, styles }) => {
   const [newsFeeds, setNewsFeeds] = useState([])
 
   const getNewsFeedHandler = async () => {
@@ -33,18 +29,14 @@ export default () => {
       <AddNewsFeed
         userData={userData}
         buttonLabel='Post'
-        // styles={{
-        //   mainContainer: { height: '300px' },
-        //   textArea: {
-        //     height: '100px'
-        //   }
-        // }}
         onAddNewsFeed={addNewsFeedHanlder}
+        styles={styles}
       />
       <NewsFeedList
         onGetPosts={getNewsFeedHandler}
         userData={userData}
         newsFeeds={newsFeeds}
+        styles={styles}
       />
     </div>
   )

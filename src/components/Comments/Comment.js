@@ -2,12 +2,18 @@ import React, { useState } from 'react'
 import moment from 'moment'
 import anonymousAvatar from '../../assets/images/anonymous-avatar.png'
 import { updateComment, deleteComment } from './actions'
-// import Comments from './index'
 
 import Dropdown from '../Dropdown'
 import LikesAndComments from '../LikesAndComments'
 
-const Comment = ({ comment = {}, userData, onGetComments }) => {
+const Comment = ({ comment = {}, userData, onGetComments, styles }) => {
+  const {
+    newsFeedCommentContainer,
+    newsFeedCommentAvatar,
+    newsFeedCommentUser,
+    newsFeedCommentDate,
+    newsFeedCommentDescription
+  } = styles || {}
   const [userComment, setUserComment] = useState(comment.description)
   const [isEditing, setIsEditing] = useState(false)
   const [isShowTextArea, setIsShowTextArea] = useState(false)
@@ -47,16 +53,31 @@ const Comment = ({ comment = {}, userData, onGetComments }) => {
   }
 
   return (
-    <div id={`comment-${comment.id}`} className='ch-comment' key={comment.id}>
+    <div
+      id={`comment-${comment.id}`}
+      className='ch-comment'
+      key={comment.id}
+      style={{ ...newsFeedCommentContainer }}
+    >
       <div className=''>
         <div className='level-left'>
           <div className='level-item'>
-            <img className='ch-comment-avatar' src={anonymousAvatar} />
+            <img
+              className='ch-comment-avatar'
+              style={{ ...newsFeedCommentAvatar }}
+              src={anonymousAvatar}
+            />
             <div>
-              <span className='ch-comment-userid'>
+              <span
+                className='ch-comment-userid'
+                style={{ ...newsFeedCommentUser }}
+              >
                 {comment.userId === '0' ? 'RS Aron Sibug' : comment.userId}
               </span>
-              <span className='ch-comment-date'>
+              <span
+                className='ch-comment-date'
+                style={{ ...newsFeedCommentDate }}
+              >
                 {dateFromNow(comment.created)}
               </span>
             </div>
@@ -97,7 +118,10 @@ const Comment = ({ comment = {}, userData, onGetComments }) => {
         </div>
         <div className='level-left'>
           <div className='level-item' style={{ width: '100%' }}>
-            <div className='ch-comment-description'>
+            <div
+              className='ch-comment-description'
+              style={{ ...newsFeedCommentDescription }}
+            >
               {isEditing ? (
                 <textarea
                   id={comment.id}
@@ -133,13 +157,6 @@ const Comment = ({ comment = {}, userData, onGetComments }) => {
             callback={onGetComments}
           />
         </div>
-
-        {/* <Comments
-          postId={comment.id}
-          isMainComment={false}
-          userData={userData}
-          isShowTextArea={isShowTextArea}
-        /> */}
       </div>
     </div>
   )

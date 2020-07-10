@@ -7,7 +7,7 @@ import { updateNewsFeed, deleteNewsFeed } from './actions'
 import Dropdown from '../Dropdown'
 import LikesAndComments from '../LikesAndComments'
 
-const NewsFeedSingle = ({ newsFeed = {}, userData, onGetPosts }) => {
+const NewsFeedSingle = ({ newsFeed = {}, userData, onGetPosts, styles }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [post, setPost] = useState(newsFeed.description)
 
@@ -128,6 +128,7 @@ const NewsFeedSingle = ({ newsFeed = {}, userData, onGetPosts }) => {
             data={newsFeed}
             userData={userData}
             callback={onGetPosts}
+            styles={styles}
           />
         </div>
       </div>

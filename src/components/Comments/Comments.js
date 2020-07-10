@@ -8,12 +8,13 @@ export const COMPONENT_ID = 'comment'
 
 const Comments = ({
   postId,
-  isMainComment,
   userData,
   comments,
   isShowTextArea,
-  onGetComments
+  onGetComments,
+  styles
 }) => {
+  const { newsFeedCommentTextArea } = styles || {}
   const [comment, setComment] = useState('')
 
   const onAddComment = async (e) => {
@@ -27,16 +28,17 @@ const Comments = ({
   return (
     <div id='ch-comments'>
       <CommentList
-        isMainComment={isMainComment}
         comments={comments}
         userData={userData}
         onGetComments={onGetComments}
+        styles={styles}
       />
       {isShowTextArea && (
         <textarea
           id={postId}
           style={{
-            border: '1px solid #dedede'
+            border: '1px solid #dedede',
+            ...newsFeedCommentTextArea
           }}
           className='textarea is-small'
           onChange={(e) => setComment(e.target.value)}
@@ -51,7 +53,6 @@ const Comments = ({
 }
 
 Comments.defaultProps = {
-  isMainComment: true,
   isShowTextArea: true
 }
 

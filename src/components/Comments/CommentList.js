@@ -1,7 +1,7 @@
 import React from 'react'
 import Comment from './Comment'
 
-const CommentList = ({ comments = [], userData, onGetComments }) => {
+const CommentList = ({ comments = [], userData, onGetComments, styles }) => {
   return (
     <div>
       {comments.map((comment) => (
@@ -10,6 +10,7 @@ const CommentList = ({ comments = [], userData, onGetComments }) => {
           comment={comment}
           userData={userData}
           onGetComments={onGetComments}
+          styles={styles}
         />
       ))}
     </div>
