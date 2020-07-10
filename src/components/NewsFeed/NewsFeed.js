@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './index.scss'
-import './NewsFeed.scss'
 import '../../assets/styles/common.scss'
 import AddNewsFeed from './AddNewsFeed'
 import NewsFeedList from './NewsFeedList'

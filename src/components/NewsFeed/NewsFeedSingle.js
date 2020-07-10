@@ -4,7 +4,6 @@ import ShowMore from 'react-show-more'
 import anonymousAvatar from '../../assets/images/anonymous-avatar.png'
 import { updateNewsFeed, deleteNewsFeed } from './actions'
 
-// import Comments from '../Comments'
 import Dropdown from '../Dropdown'
 import LikesAndComments from '../LikesAndComments'
 
@@ -131,10 +130,6 @@ const NewsFeedSingle = ({ newsFeed = {}, userData, onGetPosts }) => {
             callback={onGetPosts}
           />
         </div>
-
-        {/* <div>
-          <Comments isComment postId={newsFeed.id} userData={userData} />
-        </div> */}
       </div>
     </div>
   )

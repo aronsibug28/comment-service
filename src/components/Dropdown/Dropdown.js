@@ -23,7 +23,7 @@ const Dropdown = ({ id, actions = [], icon }) => {
               className='dropdown-item cursor-pointer'
               onClick={action.onClick}
             >
-              <label htmlFor={id}>{action.label}</label>
+              {action.label}
             </div>
           ))}
         </div>
