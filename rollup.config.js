@@ -30,7 +30,7 @@ const plugins = [
 
 const external = ['react', 'react-dom']
 
-const components = ['Comment', 'NewsFeed']
+const components = ['Comment', 'NewsFeed', 'NewsFeedV2']
 
 const destPath = '../react-crowdhound-local/'
 const libPath = destPath + 'lib/'
