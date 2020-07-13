@@ -3,6 +3,16 @@ export const userData = {
   id: 123
 }
 
+export const userData2 = {
+  name: 'Carlo Clara',
+  userId: 'cclara'
+}
+
+// export const userData2 = {
+//   name: 'Rs Sibug',
+//   userId: 'rssibug'
+// }
+
 export const newsFeed = {
   tenant: 'tooltwist/examples',
   id: 284839,
