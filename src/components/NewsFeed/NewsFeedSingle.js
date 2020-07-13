@@ -8,6 +8,7 @@ import Dropdown from '../Dropdown'
 import LikesAndComments from '../LikesAndComments'
 
 const NewsFeedSingle = ({ newsFeed = {}, userData, onGetPosts, styles }) => {
+  const [isShowComments, setIsShowComments] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [post, setPost] = useState(newsFeed.description)
 
@@ -129,6 +130,8 @@ const NewsFeedSingle = ({ newsFeed = {}, userData, onGetPosts, styles }) => {
             userData={userData}
             callback={onGetPosts}
             styles={styles}
+            isShowComments={isShowComments}
+            showComments={(isShow) => setIsShowComments(isShow)}
           />
         </div>
       </div>

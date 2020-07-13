@@ -14,6 +14,7 @@ const Comment = ({ comment = {}, userData, onGetComments, styles }) => {
     newsFeedCommentDate,
     newsFeedCommentDescription
   } = styles || {}
+  const [isShowComments, setIsShowComments] = useState(false)
   const [userComment, setUserComment] = useState(comment.description)
   const [isEditing, setIsEditing] = useState(false)
   const [isShowTextArea, setIsShowTextArea] = useState(false)
@@ -155,6 +156,8 @@ const Comment = ({ comment = {}, userData, onGetComments, styles }) => {
             isShowTextArea={isShowTextArea}
             onClickReply={onReplyComment}
             callback={onGetComments}
+            isShowComments={isShowComments}
+            showComments={(isShow) => setIsShowComments(isShow)}
           />
         </div>
       </div>

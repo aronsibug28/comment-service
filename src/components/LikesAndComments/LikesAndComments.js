@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { saveLikes } from './actions'
+import { saveLikes, saveTotalComments } from './actions'
 import { getActiveComments } from '../Comments/actions'
 
 import Comments from '../Comments'
@@ -13,7 +13,9 @@ const LikesAndComments = ({
   isShowTextArea,
   onClickReply,
   callback,
-  styles
+  styles,
+  isShowComments,
+  showComments
 }) => {
   const {
     newsFeedCommentLikeLabel,
@@ -22,15 +24,15 @@ const LikesAndComments = ({
     newsFeedCommentReplyButton,
     newsFeedCommentCancelButton
   } = styles || {}
-  const [isReplying, setIsReplying] = useState(false)
-  const [totalComments, setTotalComments] = useState(0)
-  const [comments, setComments] = useState([])
   const { extraProperties = '' } = data
   const parsedExtraProperties = JSON.parse(extraProperties)
-  const { likes = [] } = parsedExtraProperties || {}
+  const { likes = [], totalComments } = parsedExtraProperties || {}
   const totalLikes = likes.length
   const namesToolTip = likes.map((obj) => obj.name)
   const isLiked = likes.some((obj) => obj.userId === userData.userId)
+  const [isReplying, setIsReplying] = useState(false)
+  const [comments, setComments] = useState([])
+  const [commentsTotal, setCommentsTotal] = useState(totalComments)
 
   const getCommentsHandler = async () => {
     const response = await getActiveComments(data.id)
@@ -39,7 +41,8 @@ const LikesAndComments = ({
       return a.id - b.id
     })
     setComments(response.elements)
-    setTotalComments(response.elements.length)
+    saveTotalComments(data, response.elements.length)
+    setCommentsTotal(response.elements.length)
   }
 
   const onClickLike = async () => {
@@ -55,18 +58,26 @@ const LikesAndComments = ({
   }
 
   const onReply = () => {
+    showComments(true)
     setIsReplying(true)
     onClickReply(true)
   }
 
   const onCancelReply = () => {
+    showComments(false)
     setIsReplying(false)
     onClickReply(false)
   }
 
+  const onBlurComment = () => {
+    onClickReply(false)
+  }
+
   useEffect(() => {
-    getCommentsHandler()
-  }, [])
+    if (isShowComments) {
+      getCommentsHandler()
+    }
+  }, [isShowComments])
 
   const renderTotalLikes = () => {
     return (
@@ -87,10 +98,10 @@ const LikesAndComments = ({
   const renderTotalComments = () => {
     return (
       <React.Fragment>
-        {totalComments > 0 && (
+        {commentsTotal > 0 && (
           <label style={{ ...newsFeedCommentReplyLabel }}>
-            {totalComments}&nbsp;
-            {!isReply && `Comment${totalComments > 1 ? 's' : ''}`}
+            {commentsTotal}&nbsp;
+            {!isReply && `Comment${commentsTotal > 1 ? 's' : ''}`}
           </label>
         )}
       </React.Fragment>
@@ -121,6 +132,7 @@ const LikesAndComments = ({
               className='ch-reaction-button'
               htmlFor={data.id}
               style={{ ...newsFeedCommentReplyButton }}
+              onClick={() => showComments(!isShowComments)}
             >
               Comment
             </label>
@@ -150,22 +162,26 @@ const LikesAndComments = ({
         </div>
       )}
 
-      <Comments
-        postId={data.id}
-        isMainComment={!isReply}
-        userData={userData}
-        isShowTextArea={isShowTextArea}
-        comments={comments}
-        onGetComments={getCommentsHandler}
-        styles={styles}
-      />
+      {isShowComments && (
+        <Comments
+          postId={data.id}
+          isReply={isReply}
+          userData={userData}
+          isShowTextArea={isShowTextArea}
+          comments={comments}
+          onBlurComment={onBlurComment}
+          onGetComments={getCommentsHandler}
+          styles={styles}
+        />
+      )}
     </div>
   )
 }
 
 LikesAndComments.defaultProps = {
   isReply: false,
-  onClickReply: () => {}
+  onClickReply: () => {},
+  isShowTextArea: true
 }
 
 export default LikesAndComments

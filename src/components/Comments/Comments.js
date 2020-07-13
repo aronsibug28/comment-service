@@ -10,8 +10,10 @@ const Comments = ({
   postId,
   userData,
   comments,
+  isReply,
   isShowTextArea,
   onGetComments,
+  onBlurComment,
   styles
 }) => {
   const { newsFeedCommentTextArea } = styles || {}
@@ -22,6 +24,14 @@ const Comments = ({
       setComment('')
       await addComment(postId, e.target.value)
       await onGetComments()
+    }
+  }
+
+  const onBlurComments = () => {
+    if (isReply) {
+      setTimeout(() => {
+        onBlurComment()
+      }, 500)
     }
   }
 
@@ -43,6 +53,7 @@ const Comments = ({
           className='textarea is-small'
           onChange={(e) => setComment(e.target.value)}
           onKeyUp={(e) => onAddComment(e)}
+          onBlur={() => onBlurComments()}
           value={comment}
           placeholder='Write a comment...'
           rows='1'
