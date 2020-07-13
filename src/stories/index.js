@@ -8,7 +8,7 @@ import LikesAndComments from '../components/LikesAndComments'
 import NewsFeed from '../components/NewsFeed'
 import NewsFeedV2 from '../components/NewsFeedV2'
 import Dropdown from '../components/Dropdown'
-import { userData, userData2, newsFeed } from './testData'
+import { userData, userData2, newsFeed, customNewsFeedStyles } from './testData'
 
 storiesOf('Getting Started', module).add('Installation', () => (
   <Markdown source={ReadMe} />
@@ -34,7 +34,11 @@ storiesOf('Components', module).add('News Feed', () => (
 ))
 
 storiesOf('Components', module).add('News Feed V2', () => (
-  <NewsFeedV2 userData={userData2} anchorId='284915' />
+  <NewsFeedV2
+    userData={userData2}
+    styles={customNewsFeedStyles}
+    anchorId='284915'
+  />
 ))
 
 storiesOf('Components', module).add('Dropdown', () => (
