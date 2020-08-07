@@ -8,6 +8,13 @@ import Dropdown from '../Dropdown'
 import LikesAndComments from '../LikesAndComments'
 
 const NewsFeedSingle = ({ newsFeed = {}, userData, onGetPosts, styles }) => {
+  const {
+    newsFeedContentContainer,
+    newsFeedContentDescription,
+    newsFeedAvatar,
+    newsFeedUser,
+    newsFeedDate
+  } = styles || {}
   const [isShowComments, setIsShowComments] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [post, setPost] = useState(newsFeed.description)
@@ -43,6 +50,7 @@ const NewsFeedSingle = ({ newsFeed = {}, userData, onGetPosts, styles }) => {
       className='ch-newsfeed-wrapper'
       key={newsFeed.id}
       style={{
+        ...newsFeedContentContainer,
         minWidth: '1000px'
       }}
     >
@@ -50,14 +58,18 @@ const NewsFeedSingle = ({ newsFeed = {}, userData, onGetPosts, styles }) => {
         <div className='level m-b-5'>
           <div className='level-left'>
             <div className='level-item'>
-              <img className='ch-newsfeed-avatar' src={anonymousAvatar} />
+              <img
+                className='ch-newsfeed-avatar'
+                src={anonymousAvatar}
+                style={newsFeedAvatar}
+              />
             </div>
 
             <div className='level-item' style={{ flexDirection: 'column' }}>
-              <div className='ch-newsfeed-userid'>
+              <div className='ch-newsfeed-userid' style={newsFeedUser}>
                 {newsFeed.userId === '0' ? 'RS Aron Sibug' : newsFeed.userId}
               </div>
-              <div className='ch-newsfeed-date'>
+              <div className='ch-newsfeed-date' style={newsFeedDate}>
                 {dateFromNow(newsFeed.created)}
               </div>
             </div>
@@ -103,7 +115,10 @@ const NewsFeedSingle = ({ newsFeed = {}, userData, onGetPosts, styles }) => {
           </div>
         </div>
 
-        <div className='ch-newsfeed-description'>
+        <div
+          className='ch-newsfeed-description'
+          style={newsFeedContentDescription}
+        >
           {isEditing ? (
             <textarea
               key={newsFeed.id}

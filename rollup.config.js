@@ -60,27 +60,17 @@ components.forEach((component) => {
   })
 })
 
-config.push(
-  {
-    input: `src/components/index.js`,
-    output: [
-      {
-        file: `${destPath}/index.js`,
-        format: 'umd',
-        name: 'index'
-      }
-    ],
-    plugins,
-    external
-  }
-  // {
-  //   input: `./package.json`,
-  //   output: [
-  //     {
-  //       file: `${destPath}/package.json`
-  //     }
-  //   ]
-  // }
-)
+config.push({
+  input: `src/components/index.js`,
+  output: [
+    {
+      file: `${destPath}/index.js`,
+      format: 'umd',
+      name: 'index'
+    }
+  ],
+  plugins,
+  external
+})
 
 export default config

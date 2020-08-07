@@ -17,13 +17,17 @@
 </div>
 
 
-## 📦 Install
+## 📦 Build
+Run `npm run build` to compile the reusable components
 
-Add to package.json
+Then it should create another folder called `react-crowdhound-local` outside the project folder
+
+## 📦 Install
+To install it on different projects, just add the path of the compiled project to the package.json
 ```jsx
 {
     "dependencies": {
-        "react-crowdhound": "file:/Development/projects/react-crowdhound-local"
+        "react-crowdhound": "file:{path}/react-crowdhound-local"
     }
 }
 ```
@@ -45,12 +49,13 @@ Then add this code inside your main function
     host: 'uat.crowdhound.io',
     port: 80,
     apikey: 'API11OHHOKHGFQ0OYEZZZM7I79OF7',
-    debug: true
+    debug: true,
+    appId: 'rs-test' // unique id for your app
   })
 ```
 
 
-## 🔨 Development
+## 🔨 Local Development
 
 To start the project, just run the following:
 
