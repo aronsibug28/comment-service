@@ -8,8 +8,6 @@ import json from 'rollup-plugin-json'
 import image from '@rollup/plugin-image'
 import autoprefixer from 'autoprefixer'
 
-const packageJson = require('./package.json')
-
 const plugins = [
   peerDepsExternal(),
   postcss({
@@ -32,20 +30,34 @@ const plugins = [
 
 const external = ['react', 'react-dom']
 
-export default [{
-  input: 'src/index.js',
-  output: [
-    {
-      file: packageJson.main,
-      format: 'cjs',
-      sourceMap: true
-    },
-    {
-      file: packageJson.module,
-      format: 'esm',
-      sourceMap: true
-    }
-  ],
-  plugins,
-  external
-}]
+const components = ['Comment']
+
+const destPath = '../comment-service-local/'
+const libPath = destPath + 'lib/'
+const config = []
+
+components.forEach((component) => {
+  config.push({
+    input: `src/components/${component}`,
+    output: [
+      {
+        file: `${libPath + component}/index.js`,
+        format: 'umd',
+        name: component
+      },
+      {
+        file: `${libPath + component}/index.cjs.js`,
+        format: 'cjs',
+        name: component
+      },
+      {
+        file: `${libPath + component}/index.esm.js`,
+        format: 'es'
+      }
+    ],
+    plugins,
+    external
+  })
+})
+
+export default config
