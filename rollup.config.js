@@ -32,8 +32,7 @@ const external = ['react', 'react-dom']
 
 const components = ['Comment']
 
-const destPath = '../comment-service-local/'
-const libPath = destPath + 'lib/'
+const libPath = 'build/'
 const config = []
 
 components.forEach((component) => {
