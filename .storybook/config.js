@@ -4,8 +4,6 @@ import { withInfo } from '@storybook/addon-info';
 import centered from '@storybook/addon-centered/react';
 import { checkA11y } from '@storybook/addon-a11y';
 
-import useCrowdhound from '../src/components/index'
-
 addDecorator(centered);
 addDecorator(checkA11y);
 
@@ -28,13 +26,3 @@ function loadStories() {
 }
 
 configure(loadStories, module)
-
-useCrowdhound({
-  version: '2.0',
-  protocol: 'http',
-  host: 'uat.crowdhound.io',
-  port: 80,
-  apikey: 'API11OHHOKHGFQ0OYEZZZM7I79OF7',
-  debug: true,
-  appId: 'rs-app'
-})

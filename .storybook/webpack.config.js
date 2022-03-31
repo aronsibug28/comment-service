@@ -61,7 +61,19 @@ const config = {
         ],
       }
     ],
-  }
+  },
+  // devServer = {
+  //     compress: true,
+  //     hot: true,
+  //     contentBase: path.resolve(__dirname, '..'),
+  //     publicPath: '/',
+  //     historyApiFallback: true,
+  //     host: '0.0.0.0',
+  //     port: 6006,
+  //     proxy: { // proxy URLs to backend development server
+  //         '/clspa-gateway': 'http://localhost:8080',
+  //     },
+  // }
 };
 
 module.exports = config

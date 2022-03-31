@@ -1,0 +1,111 @@
+.comment-container {
+    min-width: 500px;
+    min-height: 700px;
+
+    .comment-add-container {
+        padding: 10px;
+        background-color: gainsboro;
+
+        .comment-actions {
+            display: flex;
+            justify-content: flex-end;
+            padding-bottom: 10px;
+            img {
+                height: 20px;
+                width: 20px;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+
+            input {
+                display: none;
+            }
+        }
+
+        .comment-textarea {
+            height: 100px;
+            width: 100%;
+            backface-visibility: hidden;
+            border: none;
+            box-sizing: border-box;
+            display: block;
+            font-size: 16px;
+            line-height: 1.4;
+            margin: 0;
+            padding: 10px 12px;
+            resize: none;
+            transform: translateZ(0);
+            width: 100%;
+        }
+
+        .attachment-list {
+            .attachment {
+                padding-top: 10px;
+                .remove-attachment {
+                    margin-left: 20px;
+                    cursor: pointer;
+                    color: #0404bd;
+                }
+            }
+        }
+
+        .attachment-error {
+            color: red;
+            padding: 10px 0 0 0;
+        }
+    
+        .comment-buttons {
+            margin-top: 10px;
+    
+            .comment-button {
+                margin-top: 10px;
+                font-size: 16px;
+                height: 36px;
+                padding: 0 12px;
+                background: #099;
+                color: #fff;
+                border: 0;
+                border-radius: 4px;
+                cursor: pointer;
+                font-family: inherit;
+                margin: 0;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    .comment-list {
+        margin-top: 20px;
+
+        .comment-wrapper {
+            padding: 10px 0;
+            border-bottom: 1px solid gainsboro;
+
+            .details {
+                display: flex;
+                align-items: center;
+                .avatar {
+                    width: 30px;
+                    height: 30px;
+                }
+                .username, .date {
+                    color: #8d8d8d;
+                    margin-left: 10px;
+                }
+            }
+            .comment {
+                color: #545454;
+                font-size: 18px;
+                margin-top: 5px;
+            }
+            .attachments {
+                .attachment {
+                    padding-top: 10px;
+                    color: #0404bd;
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

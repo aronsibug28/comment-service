@@ -30,9 +30,9 @@ const plugins = [
 
 const external = ['react', 'react-dom']
 
-const components = ['Comment', 'NewsFeed', 'NewsFeedV2']
+const components = ['Comment']
 
-const destPath = '../react-crowdhound-local/'
+const destPath = '../comment-service-local/'
 const libPath = destPath + 'lib/'
 const config = []
 
@@ -58,19 +58,6 @@ components.forEach((component) => {
     plugins,
     external
   })
-})
-
-config.push({
-  input: `src/components/index.js`,
-  output: [
-    {
-      file: `${destPath}/index.js`,
-      format: 'umd',
-      name: 'index'
-    }
-  ],
-  plugins,
-  external
 })
 
 export default config

@@ -1,0 +1,70 @@
+.subscriber-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .title {
+            display: flex;
+            font-size: 24px;
+            font-weight: 600;
+        }
+    
+        .subscribe-action {
+            display: flex;
+            button {
+                font-size: 16px;
+                height: 36px;
+                padding: 0 12px;
+                background: #099;
+                color: #fff;
+                border: 0;
+                border-radius: 4px;
+                cursor: pointer;
+                font-family: inherit;
+                margin: 0;
+                margin-left: 10px;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    .add-subscriber {
+        margin-top: 20px;
+        input {
+            width: 200px;
+            padding: 5px;
+        }
+        button {
+            font-size: 16px;
+            height: 30px;
+            padding: 0 12px;
+            background: #099;
+            color: #fff;
+            border: 0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            margin: 0;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+        .email-error {
+            margin-top: 5px;
+            color: red;
+        }
+    }
+
+    .subscribers-list {
+        margin-top: 20px;
+
+        .delete-subscriber {
+            color: blue;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    }
+}
