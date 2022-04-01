@@ -17,21 +17,26 @@
 </div>
 
 
-## 📦 Build
-Run `npm run build` to compile the reusable components
-
-Then it should create another folder called `comment-service-local` outside the project folder
-
 ## 📦 Install
-To install it on different projects, just add the path of the compiled project to the package.json
+Run `yarn add cl-comment-service` to install
+
+## 🔨 Sample Usage
+
 ```jsx
-{
-    "dependencies": {
-        "comment-service": "file:{path}/comment-service-local"
-    }
-}
+import Comment from 'cl-comment-service/lib/Comment';
 ```
 
+```jsx
+<Comment
+  username='rssibug'
+  email='rs.sibug@corelogic.com.au'
+  jobId={2038966}
+  maxCommentChar={10000}
+  maxFilesCount={2}
+  maxFileSize={3000000}
+  allowedFileTypes={['pdf', 'jpeg', 'jpg']}
+/>
+```
 ## 🔨 Local Development
 
 To start the project, just run the following:

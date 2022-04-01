@@ -32,7 +32,7 @@ const external = ['react', 'react-dom']
 
 const components = ['Comment']
 
-const libPath = 'build/'
+const libPath = 'lib/'
 const config = []
 
 components.forEach((component) => {
