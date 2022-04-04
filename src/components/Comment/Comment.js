@@ -35,6 +35,8 @@ const CommentService = (props) => {
     const data = {
       jobId: jobId,
       username: username,
+      firstName: firstName,
+      lastName: lastName,
       date: new Date(),
       comment: newComment,
       commentId: seletedCommentId,
@@ -56,6 +58,7 @@ const CommentService = (props) => {
       setNewComment('')
       setSelectedFiles([])
       setFileError(null)
+      setIsEditing(false)
 
       syncComments()
     })
@@ -129,6 +132,7 @@ const CommentService = (props) => {
     deleteComment(comment).then(() => {
       syncComments()
     })
+    setIsEditing(false)
   }
 
   return (
@@ -184,13 +188,13 @@ const CommentService = (props) => {
 
       <div className='comment-list'>
         {comments.map((comment, index) => {
-          const { comment: commentText, username: user, date, attachments } = comment
+          const { comment: commentText, username: user, firstName: commenterFirstName, lastName: commenterLastName, date, attachments } = comment
           return (
             <div key={`comment-${index}`} className='comment-wrapper'>
               <div className='comment-header'>
                 <div className='details'>
                   <img className='avatar' src={AvatarIcon} alt='' />
-                  <span className='fullname'>{firstName} {lastName}</span>
+                  <span className='fullname'>{commenterFirstName} {commenterLastName}</span>
                   <span className='date'>{moment(date).format('MM/DD/YYYY, HH:mm a')}</span>
                 </div>
                 <div className='comment-actions'>
