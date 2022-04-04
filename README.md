@@ -28,7 +28,10 @@ import Comment from 'cl-comment-service/lib/Comment';
 
 ```jsx
 <Comment
+  token='token-here'
   username='rssibug'
+  firstName='RS Aron'
+  lastName='Sibug'
   email='rs.sibug@corelogic.com.au'
   jobId={2038966}
   maxCommentChar={10000}
