@@ -9,7 +9,7 @@ import './index.scss'
 import Subscribe from './Subscribe'
 
 const CommentService = (props) => {
-  const { jobId, username, firstName, lastName, email, maxCommentChar, maxFilesCount, maxFileSize, allowedFileTypes, token } = props || {}
+  const { jobId, username, firstName, lastName, email, maxCommentChar, maxFilesCount, maxFileSize, allowedFileTypes } = props || {}
   const [newComment, setNewComment] = useState('')
   const [comments, setComments] = useState([])
   const [selectedFiles, setSelectedFiles] = useState([])
@@ -18,7 +18,7 @@ const CommentService = (props) => {
   const [seletedCommentId, setSelectedCommentId] = useState(null)
   const fileInputRef = useRef()
   const commentTextInputRef = useRef()
-  window.localStorage.setItem('comment-service-token', token)
+
   const { syncComments } = useWebSocket(jobId, getComments)
 
   useEffect(() => {
