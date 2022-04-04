@@ -2,21 +2,24 @@ import React, { useState, useEffect, useRef } from 'react'
 import moment from 'moment'
 import AvatarIcon from '../../assets/images/anonymous-avatar.png'
 import AttachIcon from '../../assets/images/attach-icon.png'
-import { fetchComments, generateTemporaryAccessSignedUrl, s3SignedUrlUploadHandler, saveComment, useWebSocket } from './actions'
+import { deleteComment, fetchComments, generateTemporaryAccessSignedUrl, s3SignedUrlUploadHandler, saveComment, useWebSocket } from './actions'
 import { checkAllowedFileType, getFileExtension, getFileNameWithTempBaseOnUrl } from '../../helpers/Commons'
 
 import './index.scss'
 import Subscribe from './Subscribe'
 
 const CommentService = (props) => {
-  const { jobId, username, email, maxCommentChar, maxFilesCount, maxFileSize, allowedFileTypes } = props || {}
+  const { jobId, username, firstName, lastName, email, maxCommentChar, maxFilesCount, maxFileSize, allowedFileTypes } = props || {}
   const [newComment, setNewComment] = useState('')
   const [comments, setComments] = useState([])
   const [selectedFiles, setSelectedFiles] = useState([])
   const [fileError, setFileError] = useState(null)
+  const [isEditing, setIsEditing] = useState(false)
+  const [seletedCommentId, setSelectedCommentId] = useState(null)
   const fileInputRef = useRef()
+  const commentTextInputRef = useRef()
 
-  const { isConnected, syncComments } = useWebSocket(jobId, getComments)
+  const { syncComments } = useWebSocket(jobId, getComments)
 
   useEffect(() => {
     getComments()
@@ -34,6 +37,7 @@ const CommentService = (props) => {
       username: username,
       date: new Date(),
       comment: newComment,
+      commentId: seletedCommentId,
       attachments: selectedFiles.map((attachment) => ({
         filename: attachment.filename,
         fileType: attachment.fileType,
@@ -42,7 +46,7 @@ const CommentService = (props) => {
       }))
     }
 
-    saveComment(data).then(response => {
+    saveComment(data, isEditing).then(response => {
       setComments([{
         jobId: jobId,
         username: username,
@@ -114,7 +118,20 @@ const CommentService = (props) => {
     setFileError(null)
   }
 
-  return (isConnected &&
+  const handleEditComment = (comment) => {
+    commentTextInputRef.current.focus()
+    setNewComment(comment.comment)
+    setIsEditing(true)
+    setSelectedCommentId(comment.commentId)
+  }
+
+  const handleDeleteComment = (comment) => {
+    deleteComment(comment).then(() => {
+      syncComments()
+    })
+  }
+
+  return (
     <div className='comment-container'>
       <div className='comment-add-container'>
         <div className='comment-actions'>
@@ -126,6 +143,7 @@ const CommentService = (props) => {
         </div>
         <div className='comment-field'>
           <textarea
+            ref={commentTextInputRef}
             className='comment-textarea textarea'
             placeholder='Your comment here'
             value={newComment}
@@ -148,33 +166,52 @@ const CommentService = (props) => {
             {fileError}
           </div>}
         <div className='comment-buttons'>
-          <button className='comment-button button' onClick={() => handleSubmitComment()}>
-            Submit
+          <button className='button submit-button' onClick={() => handleSubmitComment()}>
+            {isEditing ? 'Save' : 'Submit'}
           </button>
+          {isEditing &&
+            <button
+              className='button cancel-button' onClick={() => {
+                setIsEditing(false)
+                setNewComment('')
+                setSelectedCommentId(null)
+              }}
+            >
+              Cancel
+            </button>}
         </div>
       </div>
 
       <div className='comment-list'>
-        {comments.map(({ comment, username: user, date, attachments }, index) => (
-          <div key={`comment-${index}`} className='comment-wrapper'>
-            <div className='details'>
-              <img className='avatar' src={AvatarIcon} alt='' />
-              <span className='username'>{user}</span>
-              <span className='date'>{moment(date).format('MM/DD/YYYY, HH:mm a')}</span>
-            </div>
-            <div className='comment'>
-              {comment}
-            </div>
-            {attachments && attachments.length > 0 &&
-              <div className='attachments'>
-                {attachments.map((attachment, key) => (
-                  <div key={key} className='attachment'>
-                    <a href={attachment.url} target='_blank' rel='noreferrer'>{attachment.filename}</a>
-                  </div>
-                ))}
-              </div>}
-          </div>
-        ))}
+        {comments.map((comment, index) => {
+          const { comment: commentText, username: user, date, attachments } = comment
+          return (
+            <div key={`comment-${index}`} className='comment-wrapper'>
+              <div className='comment-header'>
+                <div className='details'>
+                  <img className='avatar' src={AvatarIcon} alt='' />
+                  <span className='fullname'>{firstName} {lastName}</span>
+                  <span className='date'>{moment(date).format('MM/DD/YYYY, HH:mm a')}</span>
+                </div>
+                <div className='comment-actions'>
+                  {username === user && <span className='edit' onClick={() => handleEditComment(comment)}>Edit</span>}
+                  {username === user && <span className='delete' onClick={() => handleDeleteComment(comment)}>Delete</span>}
+                </div>
+              </div>
+              <div className='comment'>
+                {commentText}
+              </div>
+              {attachments && attachments.length > 0 &&
+                <div className='attachments'>
+                  {attachments.map((attachment, key) => (
+                    <div key={key} className='attachment'>
+                      <a href={attachment.url} target='_blank' rel='noreferrer'>{attachment.filename}</a>
+                    </div>
+                  ))}
+                </div>}
+            </div>)
+        }
+        )}
       </div>
     </div>
   )

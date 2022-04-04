@@ -11,6 +11,8 @@ storiesOf('Getting Started', module).add('Installation', () => (
 storiesOf('Components', module).add('Comment', () => (
   <Comment
     username='rssibug'
+    firstName='RS Aron'
+    lastName='Sibug'
     email='rs.sibug@corelogic.com.au'
     jobId={2038966}
     maxCommentChar={10000}

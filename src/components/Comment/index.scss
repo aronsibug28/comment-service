@@ -57,13 +57,28 @@
         .comment-buttons {
             margin-top: 10px;
     
-            .comment-button {
+            .submit-button {
                 margin-top: 10px;
                 font-size: 16px;
                 height: 36px;
                 padding: 0 12px;
                 background: #099;
                 color: #fff;
+                border: 0;
+                border-radius: 4px;
+                cursor: pointer;
+                font-family: inherit;
+                margin: 0;
+                white-space: nowrap;
+            }
+    
+            .cancel-button {
+                margin-top: 10px;
+                font-size: 16px;
+                height: 36px;
+                padding: 0 12px;
+                background: none;
+                color: #000;
                 border: 0;
                 border-radius: 4px;
                 cursor: pointer;
@@ -81,16 +96,29 @@
             padding: 10px 0;
             border-bottom: 1px solid gainsboro;
 
-            .details {
+            .comment-header {
                 display: flex;
-                align-items: center;
-                .avatar {
-                    width: 30px;
-                    height: 30px;
+                justify-content: space-between;
+                .details {
+                    display: flex;
+                    align-items: center;
+                    .avatar {
+                        width: 30px;
+                        height: 30px;
+                    }
+                    .fullname, .date {
+                        color: #8d8d8d;
+                        margin-left: 10px;
+                    }
                 }
-                .username, .date {
-                    color: #8d8d8d;
-                    margin-left: 10px;
+                .comment-actions {
+                    display: flex;
+                    align-items: center;
+                    .edit, .delete {
+                        color: blue;
+                        cursor: pointer;
+                        margin-left: 10px;
+                    }
                 }
             }
             .comment {
