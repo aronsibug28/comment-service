@@ -126,6 +126,12 @@ const CommentService = (props) => {
     setNewComment(comment.comment)
     setIsEditing(true)
     setSelectedCommentId(comment.commentId)
+    setSelectedFiles(comment.attachments.map((attachment) => ({
+      filename: attachment.filename,
+      fileType: attachment.fileType,
+      description: attachment.url,
+      documentURL: attachment.description
+    })))
   }
 
   const handleDeleteComment = (comment) => {
