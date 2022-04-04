@@ -32,8 +32,8 @@ import Comment from 'cl-comment-service/lib/Comment';
   username='rssibug'
   firstName='RS Aron'
   lastName='Sibug'
-  email='rs.sibug@corelogic.com.au'
-  jobId={2038966}
+  email='email-here'
+  jobId={123456}
   maxCommentChar={10000}
   maxFilesCount={2}
   maxFileSize={3000000}
